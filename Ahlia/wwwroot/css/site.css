@@ -1,0 +1,129 @@
+html {
+  font-size: 14px;
+}
+*{
+    direction:rtl !important;
+}
+.ml-auto {
+    margin-right: auto !important;
+    left: auto;
+}
+.layout-fixed .sidebar-light .sidebar {
+    right: 0;
+    width: 20rem !important;
+}
+.sidebar-light {
+    padding-right: 0;
+}
+.brand-image {
+    float: right;
+}
+.container-fluid, .sticky-footer, .content-wrapper, .navbar-expand {
+    margin-left: 0px;
+    margin-right: 2px;
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+.sidebar {
+    width: 14rem !important;
+}
+
+    .sidebar .nav-item .nav-link {
+        text-align: right;
+    }
+
+body {
+    margin-bottom: 60px;
+    /*    direction: rtl;
+*/
+    text-align: right;
+}
+
+.sidebar .nav-item .nav-link[data-toggle=collapse]::after {
+   
+    float: left;
+   
+    
+}
+
+@media (min-width: 768px) {
+    html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+
+
+.sidebar-light .sidebar-brand {
+    color: #fafafa;
+    background-color: #387b61;
+    flex-direction: column;
+}
+
+.bg-navbar {
+    background-color: #387b61;
+}
+
+.topbar .nav-item .nav-link {
+    height: 4.375rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 .75rem;
+    flex-direction: row-reverse;
+}
+
+
+
+.sidebar .nav-item .nav-link[data-toggle=collapse].collapsed::after {
+    content: '\f053'
+}
+
+
+.text-primary {
+    color: #1cc88a !important;
+}
+a {
+    color: #1cc88a;
+    text-decoration: none;
+    background-color: transparent;
+}
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #1cc88a;
+    border-color: #1cc88a;
+}
+
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #1cc88a;
+    border-color: ##1cc88a;
+    -webkit-box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+    box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+    border-radius: .25rem;
+}
+
+
+/*.navbar-expand .navbar-nav .dropdown-menu {
+    right: -40px !important;
+}
+
+@media(max-width: 992px) {
+    .topbar .dropdown .dropdown-menu {
+        right: -50px !important;
+    }
+}*/

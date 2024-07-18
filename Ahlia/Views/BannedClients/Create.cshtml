@@ -1,0 +1,70 @@
+﻿@model Ahlia.Models.BannedClient
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>حجز مساهم</p>
+
+
+    </div>
+<div class="card-body">
+        <form asp-action="Create" enctype="multipart/form-data" method="post" style=" width: 50vw;  margin: auto;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+            <div class="form-group">
+                        <label asp-for="ClientId" class="control-label"></label><span style="color:red;">*</span>
+                        <select asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId" title="الرجاء الاخنيار" required>
+                            <option value="">اختر المساهم</option>
+                        </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BannedTypeId" class="control-label"></label>
+                <select asp-for="BannedTypeId" class ="form-control" asp-items="ViewBag.BannedTypeId"></select>
+            </div>
+           
+            </div>
+                <div class="col">
+            <div class="form-group" hidden>
+                <label asp-for="IsActive" class="control-label"></label>
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reason" class="control-label"></label>
+                <input asp-for="Reason" class="form-control" />
+                <span asp-validation-for="Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                        <input type="file" name="file1" id="file1" asp-for="Photo" class="form-control" accept="image/*" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderedBy" class="control-label"></label>
+                <input asp-for="OrderedBy" class="form-control" />
+                <span asp-validation-for="OrderedBy" class="text-danger"></span>
+            </div>
+            </div>
+            </div>
+            <div class="form-group">
+                    <input type="submit" value="حجز مساهم" class="btn btn-primary btn-lg btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

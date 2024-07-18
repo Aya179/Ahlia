@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Ahlia.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+ <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@Url.Action("Index", "Employees", new { area = "" })" class="m-0 font-weight-bold text-primary">
+            <i class="fa fa-plus"></i>
+            إنشاء موظف جديد
+        </a>
+                </div>
+<div class="table-responsive p-3">
+<table class="table align-items-center table-flush" id="dataTable">
+        <thead class="thead-light">
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+           
+           
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.City.CityName)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                <a asp-action="Details" asp-route-id="@item.Id">تفاصيل</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+</div>
+</div>
+
+ @section Scripts
+      
+      {
+
+          <script>
+
+
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable(); // ID From dataTable
+          //  $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+          </script>
+      }

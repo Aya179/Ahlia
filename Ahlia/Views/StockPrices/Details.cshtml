@@ -1,0 +1,52 @@
+﻿@model Ahlia.Models.StockPrice
+
+@{
+    ViewData["Title"] = "تفاصيل";
+}
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تفاصيل عملية التوزيع </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Shareprice" class="control-label"></label>
+                        <input asp-for="Shareprice" class="form-control" readonly />
+                        <span asp-validation-for="Shareprice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sharedate" class="control-label"></label>
+                        <input type="date" asp-for="Sharedate" class="form-control" readonly />
+                        <span asp-validation-for="Sharedate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Year" class="control-label"></label>
+                        <input  asp-for="Year" class="form-control" readonly />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContractImage" class="control-label"> @Html.DisplayNameFor(model => model.ContractImage)</label><br />
+
+                        <img src="@ViewBag.ImageDataUrl" width="300" height="300" style="border-radius: 8px;" alt="لايوجد صورة" />
+
+                        <span asp-validation-for="ContractImage" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+           
+           
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,322 @@
+﻿@model IEnumerable<Ahlia.Models.Client>
+<style>
+    .active_col {
+        display: block;
+        width: 1vw;
+        height: 1vw;
+        background: var(--success);
+        border-radius: 50%;
+    }
+</style>
+@{
+    ViewData["Title"] = "DynamicReport";
+}
+
+
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+
+                <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+                    <p>التقرير الديناميكي</p>
+
+                    <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+
+                </div>
+
+                <div class="card-body">
+
+
+
+
+                    <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+
+
+                        <div class="col">
+                            <div class="form-outline">
+                                <label class="control-label"> اسم الحقل</label>
+
+                                <select class="select2-single form-control" multiple=true name="select" id="selectId">
+                                    <option value="0">المعرف</option>
+                                    <option value="1">الاسم</option>
+                                    <option value="2">اسم الأب</option>
+                                    <option value="3">الكنية</option>
+                                    <option value="4">اسم الأم</option>
+                                    <option value="5">عدد الاسهم الفعالة</option>
+                                    <option value="6">عدد الاسهم الغير فعالة</option>
+                                    <option value="7">رقم الوثيقة الرسمية</option>
+                                    <option value="8">نوع الوثيقة الرسمية</option>
+                                    <option value="9">الجنسية</option>
+                                    <option value="10">رقم الخليوي</option>
+                                    <option value="11">رقم هاتف العمل</option>
+                                    <option value="12">تاريخ الميلاد</option>
+
+                                    <option value="13">العنوان</option>
+                                    <option value="14">عنوان السكن</option>
+                                    <option value="15">نوع المساهم</option>
+
+                                    <option value="16">الخانة</option>
+                                    <option value="17">المدينة</option>
+
+                                    <option value="18">الملاحظات</option>
+
+
+
+
+                                </select>
+
+
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="col">
+                            <div class="form-outline">
+
+                                <br />
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width: 50px;" onclick="customersearch()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <table class="table align-items-center table-flush " id="dataTableHover" role="grid" aria-describedby="dataTableHover_info">
+                        <thead class="thead-light">
+                            <tr>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Id)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.FirstName)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.MiddleName)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.LastName)</th>
+
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Mother)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.ActiveStocks)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.NotactiveStocks)</th>
+
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.NationalId)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.NationalIdType)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Nationality)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Mobile2)</th>
+
+
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Mobile1)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Birthdate)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.AddressDomicil)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.OriginalAddress)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.ClientTypeId)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Khana)</th>
+
+
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.CityId)</th>
+                                <th style="white-space: nowrap;text-align:center;"> @Html.DisplayNameFor(model => model.Notes)</th>
+
+
+
+
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.MiddleName)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td style="text-align:center;" >
+                                        @Html.DisplayFor(modelItem => item.Mother)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.ActiveStocks)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.NotactiveStocks)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.NationalId)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.NationalIdType)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Nationality)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Mobile2)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Mobile1)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Birthdate)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.AddressDomicil)
+                                    </td>
+
+
+                                    <td style="text-align: center;">
+                                        @Html.DisplayFor(modelItem => item.OriginalAddress)
+                                    </td> 
+                                    <td style="text-align: center;">
+                                        @Html.DisplayFor(modelItem => item.ClientType.TypeName)
+                                    </td>
+                                    <td style="text-align: center;">
+                                        @Html.DisplayFor(modelItem => item.Khana)
+                                    </td>
+
+                                    <td style="text-align: center;">
+                                        @Html.DisplayFor(modelItem => item.City.CityName)
+                                    </td>
+                                    <td style="text-align: center;">
+                                        @Html.DisplayFor(modelItem => item.Notes)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+
+                @* <div class="card-footer">
+
+                <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+                <span id="Amount" class="fa-pull-left"></span>
+                </div>*@
+
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+@section Scripts
+
+    {
+    <script>
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('dataTableHover');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'TotalPenfitsPerYearReport.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+
+
+        $(document).ready(function () {
+
+            $('.select2-single').select2();
+
+            var dt = $('#dataTableHover').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ]
+            });
+            dt.columns([0,1, 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]).visible(true);
+
+
+
+
+        });
+
+
+
+
+        function customersearch() {
+
+            //var text = $('#selectId option:selected').toArray().map(item => item.value).join();
+            var text = $('#selectId option:not(:selected)').toArray().map(item => item.value).join();
+            var bar = text.slice();
+            var array = bar.split(',');
+
+
+
+            console.log(text);
+
+           
+
+          //  $.get("/Reports/DynamicReport1",{ select:bar}, function (data) {
+
+
+                 //   console.log(data);
+
+              var dt=  $('#dataTableHover').DataTable({
+                    dom: 'Bfrtip',
+                    retrieve: true,
+
+                    buttons: [
+                        'excel'
+                    ]
+                });
+            dt.columns(text).visible(false);
+            $('#dataTableHover').css('width','100%');
+          //      for(var i=0;i<array.length;i++)
+          //      alert(array[i]);
+          //{  
+          //    dt.columns(0).visible(true);
+          //    dt.columns(2).visible(true);
+
+          //   // dt.columns(array[i]).visible(true);
+          
+          
+          //}
+
+
+
+          //  });
+
+
+
+
+
+
+        }
+
+    </script>
+      }
+

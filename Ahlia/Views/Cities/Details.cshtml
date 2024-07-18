@@ -1,0 +1,42 @@
+﻿@model Ahlia.Models.City
+
+@{
+    ViewData["Title"] = "تفاصيل المدينة";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p> معلومات المدينة</p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CityId" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="CityName" class="control-label"></label>
+                        <input asp-for="CityName" class="form-control" />
+                        <span asp-validation-for="CityName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Country" class="control-label"></label>
+                        <input asp-for="Country" class="form-control" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+          
+
+        </form>
+    </div>
+</div>
+
+

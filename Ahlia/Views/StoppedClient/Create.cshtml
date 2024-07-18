@@ -1,0 +1,68 @@
+﻿@model Ahlia.Models.StoppedClient
+
+@{
+    ViewData["Title"] = "";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p class=" pull-right">التحول لغير مودع</p>
+
+
+    </div>
+    <div class="card-body">
+        <form role="form" asp-action="Create" enctype="multipart/form-data" method="post" style=" width: 50vw;  margin: auto;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label asp-for="ClientId" class="control-label"></label><span style="color:red;">*</span>
+                        <select asp-for="ClientId" asp-items="ViewBag.ClientId" class="form-control" title="الرجاء الاخنيار" required>
+                            <option value="">اختر المساهم</option>
+                        </select>
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StoppedTypeId" class="control-label"></label>
+                        <select asp-for="StoppedTypeId" asp-items="ViewBag.StoppedStatusId" class="form-control"></select>
+                        <span asp-validation-for="StoppedTypeId" class="text-danger"></span>
+
+                    <div class="form-group" hidden>
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input type="date" asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group"hidden>
+                        <label asp-for="Enddate" class="control-label"></label>
+                        <input type="date" asp-for="Enddate" class="form-control" />
+                        <span asp-validation-for="Enddate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label>
+                        <input type="text" asp-for="Reason" class="form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+
+                        <div class="form-group">
+                            <label asp-for="Photo" class="control-label"> @Html.DisplayNameFor(model => model.Photo)</label>
+                            <input asp-for="Photo" class="form-control" type="file" name="photo" id="photo" accept="image/*" multiple="multiple" />
+
+
+                        </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+      التحويل لغير مودع     </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

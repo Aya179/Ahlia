@@ -1,0 +1,62 @@
+﻿@model Ahlia.Models.Rassing
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>زيادة عدد الأسهم 
+
+        </p>
+
+
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" style=" width: 50vw;  margin: auto;" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+
+                    <label asp-for="Amount" class="control-label"></label><span style="color:red;">*</span>
+                    <input asp-for="Amount" class="form-control" type="number" min="2" title="الرجاء ادخال مقدار الزيادة" required />
+                    <span asp-validation-for="ContractImag" class="text-danger"></span>
+
+                </div>
+                <div class="col">
+
+                    <label asp-for="ContractImag" class="control-label"></label><span style="color:red;">*</span>
+                    <input asp-for="ContractImag" class="form-control" type="file" name="ContractImage" id="ContractImag" accept="image/*" multiple="multiple" required />
+                    <span asp-validation-for="ContractImag" class="text-danger"></span>
+
+                </div>
+                <div class="col" hidden>
+
+                    <label asp-for="RassingType" class="control-label"></label>
+                    <select asp-for="RassingType" class="form-control" >
+                        <option value="نقدية">نقدية</option>
+                        <option value="أرباح دورة">أرباح دورة</option>
+                        <option value="عينية">عينية</option>
+                    </select>
+                    <span asp-validation-for="RassingType" class="text-danger"></span>
+
+                </div> 
+               
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                زيادة عدد الأسهم
+            </button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

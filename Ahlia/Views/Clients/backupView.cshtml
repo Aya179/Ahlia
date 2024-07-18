@@ -1,0 +1,65 @@
+﻿<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+       
+        <p>إنشاء نسخة احتياطية</p>
+
+
+    </div>
+    <div class="card-body">
+        <form id="prospects_form" asp-action="backup">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" >
+           إنشاء
+        </button>
+        </form>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+       
+        <p>استرداد نسخة احتياطية</p>
+
+
+    </div>
+    <div class="card-body">
+        <form id="prospects_form" asp-action="RetrieveBackup" enctype="multipart/form-data" onsubmit="go()">
+
+            <div class="form-group">
+                <label  class="control-label"> الملف</label>
+                <input class="form-control" type="file" name="file1" id="file1" multiple="multiple" />
+
+
+               
+            </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" >
+           استرداد
+        </button>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+      
+        function go() {
+            swal({
+                title: "",
+                text: "الرجاء الانتظار...",
+                icon: "https://www.boasnotas.com/img/loading2.gif",
+                buttons: false,
+                closeOnClickOutside: false,
+                //timer: 3000,
+                //icon: "success"
+            })
+            Swal.showLoading()
+                ;
+            
+        }
+    </script>
+}

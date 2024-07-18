@@ -1,0 +1,457 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="row">
+        
+
+        <div class="col-12">
+            <div class="card-header" >
+                <p style="text-align:center; font-weight: 900;">الصفحة المالية وحركات الأسهم</p>
+
+                <span class="m-0 font-weight-bold text-primary" ></span>
+
+            </div>
+            <div class="card mb-4">
+
+                <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+                    <p>أرباح المساهم</p>
+
+                    <span class="m-0 font-weight-bold text-primary" id="total"></span>
+                    
+                </div>
+               
+                <div class="card-body" id="card">
+
+
+
+
+                    <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+
+
+                        <div class="col">
+                            <div class="form-outline" >
+                                <label class="control-label" > المساهمين</label>
+
+                                <select asp-items="ViewBag.Client" class="form-control" id="clientSelect" onchange="Search()">
+                                    <option value="0" selected>الرجاء اختيار مساهم</option>
+                                    </select>
+
+
+                                    
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="col">
+                          
+                        </div>
+
+                    </div>
+
+
+
+                    <table class="table table-striped" id="dataTableHover">
+
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                <th style="text-align: center;" scope="col">
+                                    المساهم
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    قيمة الربح
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    التاريخ
+                                </th>
+                                
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="PenefitTable">
+                        </tbody>
+
+
+
+
+                    </table>
+
+
+
+
+
+                </div>
+
+
+
+                <div class="col">
+                    <div class="form-outline">
+
+                        <br />
+                      
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="card mb-4">
+
+                <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+                    <p>دفعات المساهم</p>
+
+                    <span class="m-0 font-weight-bold text-primary" ></span>
+
+                </div>
+
+                <div class="card-body" id="card">
+
+
+
+
+
+
+
+
+                    <table class="table table-striped" id="dataTableHover">
+
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                <th style="text-align: center;" scope="col">
+                                    المساهم
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    رقم الدفعة
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    مقدارالدفع
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    تاريخ الدفع
+                                </th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="PaymentsTable">
+                        </tbody>
+
+
+
+
+                    </table>
+
+
+
+
+
+                </div>
+
+
+
+                <div class="col">
+                    <div class="form-outline">
+
+                        <br />
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card mb-4">
+
+                <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+                    <p>حركة الأسهم</p>
+
+                    <span class="m-0 font-weight-bold text-primary" id="total"></span>
+
+                </div>
+
+                <div class="card-body" id="card">
+
+
+
+
+                    <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+
+
+                       
+
+                    </div>
+
+
+
+                    <table class="table table-striped" id="dataTableHover">
+
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                <th style="text-align: center;" scope="col">
+                                     من المساهم
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                   إلى المساهم
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                  عدد الأسهم المنقولة
+                                </th> 
+                                <th style="text-align: center;" scope="col">
+                                    نوع النقل
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                   التاريخ
+                                </th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="stockTable">
+                        </tbody>
+
+
+
+
+                    </table>
+
+
+
+
+
+                </div>
+
+
+
+                <div class="col">
+                    <div class="form-outline">
+
+                        <br />
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+        </div>
+
+    </div>
+</section>
+
+ @section Scripts
+ {
+     <script>
+        function Search() {
+
+
+
+          
+
+
+            var ID = document.getElementById('clientSelect').value;
+            Swal.fire({
+                icon: " https://www.boasnotas.com/img/loading2.gif",
+                title: 'يتم تحميل البيانات',
+                text: 'الرجاء الانتظار....',
+                footer: false,
+                timer: 40000,
+                showCancelButton: false,
+                showCloseButton: false
+            })
+            Swal.showLoading();
+
+
+            $.get("/Reports/clientPayment", { clientId: ID }, function (data) {
+                //console.log(data);
+                document.getElementById('total').innerHTML = "الرصيد:" + data.toltal;
+
+
+
+                var table_tr = "";
+
+
+                for (var i = 0; i < data.clientPayment.length; i++) {
+                    if (data.clientPayment[i].paymentdate != null)
+                   { table_tr += `
+                                                     <tr>
+                                                                             <td style="text-align: center;"> `+ data.clientPayment[i].client.firstName + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data.clientPayment[i].id + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data.clientPayment[i].amount + ` </td>
+                                                                                                      
+                                                                                                              <td style="text-align: center;"> `+
+
+                                                                                                              data.clientPayment[i].paymentdate.split('T')[0]   + ` </td>
+                                                                                            
+
+
+
+
+
+
+                                                       </tr>`;
+                                                   }
+                                                       else{
+
+                        table_tr += `
+                                                             <tr>
+                                                                                     <td style="text-align: center;"> `+ data.clientPayment[i].client.firstName + ` </td>
+                                                                                                              <td style="text-align: center;"> `+ data.clientPayment[i].id + ` </td>
+                                                                                                              <td style="text-align: center;"> `+ data.clientPayment[i].amount + ` </td>
+
+                                                                                                                      <td style="text-align: center;"> `+
+
+                            data.clientPayment[i].paymentdate + ` </td>
+
+
+
+
+
+
+
+                                                               </tr>`;
+
+
+                                                       }
+
+                }
+
+
+
+
+                document.getElementById('PaymentsTable').innerHTML = table_tr;
+
+
+
+                var table_tr1 = "";
+
+
+                for (var i = 0; i < data.clientpenefits.length; i++) {
+
+                    table_tr1 += `
+                                                                     <tr>
+                                                                                                                     <td style="text-align: center;"> `+ data.clientpenefits[i].client.firstName + ` </td>
+                                                                                                                                                      <td style="text-align: center;"> `+ data.clientpenefits[i].completeAmount + ` </td>`;
+                                                                                                                                                       if (data.clientpenefits[i].price.sharedate==null)
+                                                                                                                                                       {
+                                                                                                                                      table_tr1 += `<td style="text-align: center;"> لايوجد </td>`;
+                                                                                                                                                       }
+                                                                                                                                                       else{
+                        table_tr1 += `<td style="text-align: center;" > ` + data.clientpenefits[i].price.sharedate.split('T')[0] + ` </td>`;
+                                                                                                                                                       }
+
+                                                                                                                                                              table_tr1 += `</tr>`
+
+                }
+
+
+
+
+                document.getElementById('PenefitTable').innerHTML = table_tr1;
+
+                var table_tr2 = "";
+
+
+                for (var i = 0; i < data.stockMovs.length; i++) {
+                    if (data.stockMovs[i].movementDate != null) {
+                        table_tr2 += `
+                                                             <tr>
+                                                                                                     <td style="text-align: center;"> `+ data.stockMovs[i].client.firstName + ` </td>
+                                                                                                                              <td style="text-align: center;"> `+ data.stockMovs[i].newClient.firstName + ` </td>
+                                                                                                                      <td style="text-align: center;"> `+ data.stockMovs[i].amount + ` </td>
+                                                                                                                                      <td style="text-align: center;"> `+ data.stockMovs[i].movementType.movementType + ` </td>
+                                                                                                                      <td style="text-align: center;"> `+
+
+                            data.stockMovs[i].movementDate.split('T')[0] + ` </td>
+
+
+
+
+
+
+
+                                                               </tr>`;
+                    }
+                    else {
+
+                        table_tr2 += `
+                                                                     <tr>
+                                                                                                     <td style="text-align: center;"> `+ data.stockMovs[i].client.firstName + ` </td>
+                                                                                                                                      <td style="text-align: center;"> `+ data.stockMovs[i].newClient.firstName + ` </td>
+                                                                                                                              <td style="text-align: center;"> `+ data.stockMovs[i].amount + ` </td>
+                                                                                                                                      <td style="text-align: center;"> `+ data.stockMovs[i].movementType.movementType + ` </td>
+
+                                                                                                                              <td style="text-align: center;"> `+
+
+                            data.stockMovs[i].movementDate + ` </td>
+
+
+
+
+
+
+
+                                                                       </tr>`;
+
+
+                    }
+
+                }
+
+
+
+
+                document.getElementById('stockTable').innerHTML = table_tr2;
+
+               
+            });
+
+        }
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('card');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'ClientsPenfits.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+        function go() {
+            Swal.fire({
+                icon: " https://www.boasnotas.com/img/loading2.gif",
+                title: 'يتم تحميل البيانات',
+                text: 'الرجاء الانتظار....',
+                footer: false,
+                showCancelButton: false,
+                showCloseButton: false
+            })
+            Swal.showLoading();
+
+
+        }
+     </script>
+ }           

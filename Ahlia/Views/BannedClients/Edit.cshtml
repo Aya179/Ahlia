@@ -1,0 +1,67 @@
+﻿@model Ahlia.Models.BannedClient
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>إلغاء حجز مساهم </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group" hidden>
+                        <label asp-for="ClientId" class="control-label"></label>
+                        <input asp-for="ClientId" class="form-control" />
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="BannedTypeId" class="control-label"></label>
+                        <input asp-for="BannedTypeId" class="form-control" />
+                        <span asp-validation-for="BannedTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="Startdate" class="control-label"></label>
+                        <input type="date" asp-for="Startdate" class="form-control" />
+                        <span asp-validation-for="Startdate" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group" hidden>
+                        <label asp-for="Enddate" class="control-label"></label>
+                        <input type="date" asp-for="Enddate" class="form-control" />
+                        <span asp-validation-for="Enddate" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group" hidden>
+                        <label asp-for="Reason" class="control-label"></label>
+                        <input type="text" asp-for="Reason" class="form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CancelImage" class="control-label"> @Html.DisplayNameFor(model => model.CancelImage)</label>
+                        <input asp-for="CancelImage" class="form-control" type="file" name="CancelImage" id="CancelImage" accept="image/*" multiple="multiple" />
+
+
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                إلغاء حجز
+            </button>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

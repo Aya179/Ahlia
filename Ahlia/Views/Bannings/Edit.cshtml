@@ -1,0 +1,42 @@
+﻿@model Ahlia.Models.Banning
+
+@{
+    ViewData["Title"] = "تعديل";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تعديل </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="BannedType" class="control-label"></label>
+                        <input asp-for="BannedType" class="form-control" />
+                        <span asp-validation-for="BannedType" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                تعديل
+            </button>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

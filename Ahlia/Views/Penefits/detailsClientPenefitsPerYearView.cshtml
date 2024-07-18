@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "تفاصيل أرباح المساهم";
+}
+
+@*<style>
+    tr:hover, tr.selected {
+        background-color: lightblue;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    }
+
+    a {
+        display: inline-block;
+    }
+
+</style>
+*@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a asp-action="CustomerspenfitsIndex">
+                    <i class="fa fa-arrow-right fa-lg pull-right"></i>
+                </a>
+                <h6 class="m-0 font-weight-bold text-primary pull-left">تفاصيل أرباح المساهم</h6>
+               
+            </div>
+            <div class="table-responsive p-3">
+                <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table align-items-center table-flush " id="dataTableHover" role="grid" aria-describedby="dataTableHover_info">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th style="white-space: nowrap;text-align:center;">الدورة </th>
+
+                                        <th style="white-space: nowrap;text-align:center;"> المساهم</th>
+                                        <th style="white-space: nowrap;text-align:center;"> الأرباح الكلية</th>
+
+                                        
+
+
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="customertable">
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts
+
+    {
+    <script>
+
+
+
+        $(document).ready(function () {
+            var baseUrl = (window.location).href; // You can also use document.URL
+var koopId = baseUrl.substring(baseUrl.lastIndexOf('=') + 1);
+
+            $.get("/Penefits/detailsClientPenefitsPerYear", {clientId: koopId}, function (data) {
+
+                var table_tr = "";
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                                                         <tr>
+                                                                                         <td style="text-align: center;"> `+ data[i].year + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data[i].customername + ` </td>
+
+                                                                                                        <td style="text-align: center;"> `+ data[i].total + ` </td>
+
+
+
+                                                                           </tr>`;
+                    //Sumtotal += data[i].total;
+
+
+                }
+                // document.getElementById("customerTotal").value = Sumtotal;
+
+
+                document.getElementById('customertable').innerHTML = table_tr;
+
+                $('#dataTableHover').DataTable(); // ID From dataTable
+
+
+
+            });
+
+        });
+
+
+
+
+       
+
+    </script>
+      }
+

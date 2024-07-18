@@ -1,0 +1,65 @@
+﻿@model Ahlia.Models.StockPrice
+
+@{
+    ViewData["Title"] = "حذف";
+}
+<style>
+    .swal2-actions {
+        display: none !important;
+    }
+</style>
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>التراجع عن عملية التوزيع </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Delete" id="deleteform">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Shareprice" class="control-label"></label>
+                        <input asp-for="Shareprice" class="form-control"  readonly/>
+                        <span asp-validation-for="Shareprice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sharedate" class="control-label"></label>
+                        <input type="date" asp-for="Sharedate" class="form-control" readonly />
+                        <span asp-validation-for="Sharedate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="Year" class="control-label"></label>
+                        <input type="date" asp-for="Year" class="form-control"  readonly/>
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-lg btn-block" onclick="delete_fun()">
+                تراجع
+            </a>
+
+
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script>
+    function delete_fun()
+    {
+            Swal.fire({
+      icon: 'error',
+      title: 'هل أنت متأكد من عملية الحذف؟',
+      text: 'قم بالتأكيد',
+                footer: '<button class="swal2-confirm swal2-styled" type="submit" form="deleteform">حذف</button>'
+    });
+    }
+    </script>
+}

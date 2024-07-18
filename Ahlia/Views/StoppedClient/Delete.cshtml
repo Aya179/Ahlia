@@ -1,0 +1,59 @@
+﻿@model Ahlia.Models.StoppedClient
+
+@{
+    ViewData["Title"] = "حذف";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>حذف </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label asp-for="ClientId" class="control-label"></label>
+                        <input asp-for="ClientId" class="form-control" />
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StoppedTypeId" class="control-label"></label>
+                        <input asp-for="StoppedTypeId" class="form-control" />
+                        <span asp-validation-for="StoppedTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input type="date" asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Enddate" class="control-label"></label>
+                        <input type="date" asp-for="Enddate" class="form-control" />
+                        <span asp-validation-for="Enddate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label>
+                        <input type="text" asp-for="Reason" class="form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                حذف
+            </button>
+
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@model Ahlia.Models.ClientStokcksMovement
+
+@{
+    ViewData["Title"] = "حذف";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>التراجع عن نقل الملكية </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label type="text" asp-for="ClientId" class="control-label"></label>
+                        <input asp-for="ClientId" class="form-control" />
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MovementTypeId" class="control-label"></label>
+                        <input type="text" asp-for="MovementTypeId" class="form-control" />
+                        <span asp-validation-for="MovementTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewClientId" class="control-label"></label>
+                        <input asp-for="NewClientId" class="form-control" />
+                        <span asp-validation-for="NewClientId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="MovementDate" class="control-label"></label>
+                        <input type="date" asp-for="MovementDate" class="form-control" />
+                        <span asp-validation-for="MovementDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContractImage" class="control-label"></label>
+                        <input type="file" asp-for="ContractImage" class="form-control" />
+                        <span asp-validation-for="ContractImage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label>
+                        <input type="text" asp-for="Reason" class="form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label"></label>
+                        <input type="text" asp-for="Notes" class="form-control" />
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                تراجع
+            </button>
+        </form>
+    </div>
+</div>

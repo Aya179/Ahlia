@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Ahlia.Models.ClientStokcksMovement>
+
+@{
+    ViewData["Title"] = "نقل الأسهم";
+}
+
+
+<style>
+    tr:hover, tr.selected {
+        background-color: lightblue;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    }
+
+    a {
+        display: inline-block;
+    }
+
+</style>
+<div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <a asp-action="Create" class="m-0 font-weight-bold text-primary">
+            <i class="fa fa-plus"></i>
+            نقل الملكية
+        </a>
+        <span>جدول حركة الأسهم</span>
+    </div>
+    <div class="table-responsive p-3">
+        <div style="display: flex;">
+            <a id="delete" style="display:none">التراجع عن نقل الملكية </a>
+            <a id="Edit" style="display:none">edit</a>
+            <a id="Details" style="display:none">details</a>
+        </div>
+
+        <table class="table align-items-center table-flush" id="dataTable">
+            <thead class="thead-light">
+                <tr>
+                    <th style="white-space: nowrap;"> رقم عملية النقل</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.NewClientId)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.ClientId)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.MovementTypeId)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Amount)</th>
+                    
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.MovementDate)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Reason)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Notes)</th>
+
+                    <th style="white-space: nowrap;">
+
+                    </th>
+
+
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NewClient.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MovementType.MovementType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MovementDate)
+                        </td>
+
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Reason)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>
+                                                <td style="text-align: center; white-space: nowrap;">
+                            <a asp-action="Details" asp-route-id="@item.Id">طباعة صك البيع</a>|
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">التراجع عن نقل الملكية</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts
+
+    {
+
+    <script>
+       
+
+
+
+        $("#dataTable tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var value = $(this).find('td:first').html();
+            var result = value.split(' ').join('')
+            document.getElementById('delete').innerHTML = '<a class="btn btn-danger btn-sm" href="/ClientStokcksMovements/Delete/' + result + '">التراجع عن نقل الملكية&nbsp;</a>&nbsp;';
+            document.getElementById("delete").style.display = "block";
+            document.getElementById('Edit').innerHTML = '<a  class="btn btn-primary btn-sm"  href="/ClientStokcksMovements/Edit/' + result + '"> تعديل&nbsp;</a>&nbsp;';
+            document.getElementById("Edit").style.display = "block";
+            document.getElementById('Details').innerHTML = '<a class="btn btn-warning btn-sm"   href="/ClientStokcksMovements/Details/' + result + '">طباعة صك البيع</a>';
+            document.getElementById("Details").style.display = "block";
+
+
+          
+        });
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                pageLength: 5,
+                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 100]],
+
+            }); // ID From dataTable
+            //  $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+      }
+
+
+
+

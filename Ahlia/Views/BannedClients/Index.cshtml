@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Ahlia.Models.BannedClient>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+ <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <a asp-action="Create" class="m-0 font-weight-bold text-primary">
+            
+            حجز مساهم
+        </a>
+        <p class=" pull-right">المساهمين المحجوزين</p>
+
+                </div>
+<div class="table-responsive p-3">
+        <div style="display: flex;">
+            <a style="display:none" id="stop">إلغاء حجز</a>
+        </div>
+        <table class="table align-items-center table-flush" id="dataTableHover">
+        <thead class="thead-light">
+        <tr>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Client.clientnumber)</th>
+                    <th style="white-space: nowrap;">@Html.DisplayNameFor(model => model.ClientId)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Startdate)</th>
+                    <th style="white-space: nowrap;">@Html.DisplayNameFor(model => model.Enddate) </th>
+                    
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Reason) </th>
+                  
+                     <th> @Html.DisplayNameFor(model => model.BannedTypeId)</th>
+           
+                    <th style="white-space: nowrap;">@Html.DisplayNameFor(model => model.OrderedBy) </th>
+                    <th></th>
+           
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                        <td id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Client.clientnumber)
+            </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client.FirstName)
+                           
+                        </td>
+            <td>
+                            @{
+                                string DateOnly = item.Startdate.Value.Date.ToShortDateString();
+                            }
+                @Html.DisplayFor(modelItem => DateOnly)
+            </td>
+            @if(item.Enddate!=null)
+            {
+                  
+                                string endDateOnly = item.Enddate.Value.Date.ToShortDateString();
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => endDateOnly)
+                            </td>
+                        }
+            else{
+            <td>
+                @Html.DisplayFor(modelItem => item.Enddate)
+            </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.BannedType.BannedType)
+            </td>
+            
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderedBy)
+                        </td>
+                        <td>
+
+
+
+                            @if (item.CancelImage == null)
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.Id">إلغاء الحجز</a>
+
+
+                            }
+                            else
+                            {
+                                <a asp-action="Details" asp-route-id="@item.Id"> قرار إلغاء الحجز</a>
+
+                            }
+                        </td>
+
+                       
+
+          
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts
+{
+    <script>
+
+
+                function price(NewId) {
+
+                    var tdElem = document.getElementById(NewId);
+
+
+                    var Price = tdElem.innerHTML;
+
+                    $.post("/BannedClients/cancelBAnning", { id: NewId }, function (data) {
+
+
+                    });
+
+
+                }
+         $(document).ready(function () {
+            //$('#dataTable').DataTable(); // ID From dataTable
+              $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+}

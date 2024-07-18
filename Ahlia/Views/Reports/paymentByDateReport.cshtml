@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+
+
+
+<section>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+
+                <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+                    <p>الدفعات في التاريخ</p>
+
+                                    <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+
+                </div>
+
+                <div class="card-body">
+
+
+
+
+                    <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+
+
+                        <div class="col">
+                            <div class="form-outline">
+                                <label class="control-label"> تاريخ الدفعة</label>
+
+                                <input class="form-control" id="start" type="date" max="@DateTime.Today.ToString("yyyy-MM-dd")" />
+
+
+
+
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="col">
+                            <div class="form-outline">
+
+                                <br />
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" style="width: 50px;" onclick="Search()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <table class="table table-striped" id="dataTableHover">
+
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                <th style="text-align: center;" scope="col">
+                                    رقم أمر الدفع
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    المبلغ
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    تاريخ الدفع
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    المساهم
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    المدينة
+                                </th>
+                                <th style="text-align: center;" scope="col">
+                                    اسم الفرع
+                                </th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="table">
+                        </tbody>
+
+
+
+
+                    </table>
+
+
+
+
+
+                </div>
+
+               @* <div class="card-footer">
+
+                    <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+                </div>*@
+
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+@section Scripts {
+
+    <script>
+        
+       
+
+        function Search() {
+
+
+
+            var start = document.getElementById('start').value;
+            //var end = document.getElementById('end').value;
+
+            // alert(start);
+            // alert(BId);
+
+            $.get("/Reports/paymentByDateApi", { startDate: start}, function (data) {
+                //console.log(data);
+                var table_tr = "";
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                             <tr>
+                                                             <td style="text-align: center;"> `+ data[i].id + ` </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].amount + ` </td>
+                                                                                              <td style="text-align: center;"> `+ data[i].paymentdate.split('T')[0] + ` </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].client.firstName + ` </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].city.cityName + ` </td>
+
+                                                                                      <td style="text-align: center;"> `+ data[i].branchName + ` </td>
+
+
+
+
+
+                                               </tr>`;
+
+                }
+
+
+
+
+                document.getElementById('table').innerHTML = table_tr;
+               //template:dataTable
+              //  $('#dataTableHover').DataTable(); // ID From dataTable
+              //dataTable:withButton
+                //  'copy', 'csv', 'excel', 'pdf', 'print'
+
+                    $('#dataTableHover').DataTable({
+                        dom: 'Bfrtip',
+                    retrieve: true,
+
+                        buttons: [
+                            'excel'
+                        ]
+                    });
+
+                  
+            });
+
+        }
+
+
+
+
+
+
+
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('dataTableHover');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'Report.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+
+                // jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+}

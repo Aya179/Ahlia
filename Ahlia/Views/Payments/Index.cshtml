@@ -1,0 +1,182 @@
+﻿
+@model IEnumerable<Ahlia.Models.Payment>
+
+@{
+    ViewData["Title"] = "الدفعات";
+}
+
+
+
+<style>
+    tr:hover, tr.selected {
+        background-color: lightblue;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    
+
+    a {
+        display: inline-block;
+    }
+
+</style>
+<div class="row">
+    <div class="col-lg-12 col-md-3 col-sm-12 col-xs-12">
+<div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <a asp-action="Create" class="m-0 font-weight-bold text-primary">
+            
+            إضافة دفعة
+        </a>
+                <p class="pull-left">الدفعات المالية للمساهمين</p>
+    </div>
+    <div class="table-responsive p-3">
+        <div style="display: flex;">
+            <a id="delete" style="display:none">delete </a>
+            <a id="Edit" style="display:none">edit</a>
+            <a id="Details" style="display:none">details</a>
+            <a id="bill" style="display:none">طباعة</a>
+        </div>
+
+        <table class="table align-items-center table-flush" id="dataTableHover">
+            <thead class="thead-light">
+                <tr>
+                    <th style="white-space: nowrap;"> رقم أمر الدفع</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.ClientId)</th>
+
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Paymentdate)</th>
+                    <th style="white-space: nowrap;">  @Html.DisplayNameFor(model => model.Amount)</th>
+                    <th style="white-space: nowrap;">  @Html.DisplayNameFor(model => model.BranchName)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.PayementFor)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.BankAccount)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.ReceiverName)</th>
+                    <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.ReceiverNumber)</th>
+                    
+                                       <th style="white-space: nowrap;"> @Html.DisplayNameFor(model => model.Notes)</th>
+
+                    <th style="white-space: nowrap;">
+
+                    </th>
+
+
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client.FirstName)
+                                                 </td>
+                                @if (item.Paymentdate != null)
+                                {
+                                    string DateOnly = item.Paymentdate.Value.Date.ToShortDateString();
+
+                                    <td>
+                                        
+                                           
+                                        @Html.DisplayFor(modelItem => DateOnly)
+                        </td>
+                                }
+                        else{
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Paymentdate)
+                                    </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BranchName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PayementFor)
+                        </td>
+
+                       
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.BankAccount)
+                        </td>
+                        
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.ReceiverName)
+                        </td>
+                        
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.ReceiverNumber)
+                        </td>
+                        
+                        
+                        
+                        
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>
+                        <td style="text-align: center; white-space: nowrap;">
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-eye"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a> |
+                            <a asp-action="bill" asp-route-PaymentId="@item.Id">طباعة</a> 
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+@section Scripts
+
+    {
+
+    <script>
+
+
+
+
+        $("#dataTableHover tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var value = $(this).find('td:first').html();
+            var result = value.split(' ').join('')
+            document.getElementById('delete').innerHTML = '<a class="btn btn-danger btn-sm" href="/Payments/Delete/' + result + '">حذف&nbsp;</a>&nbsp;';
+            document.getElementById("delete").style.display = "block";
+            document.getElementById('Edit').innerHTML = '<a  class="btn btn-primary btn-sm"  href="/Payments/Edit/' + result + '"> تعديل&nbsp;</a>&nbsp;';
+            document.getElementById("Edit").style.display = "block";
+            document.getElementById('Details').innerHTML = '<a class="btn btn-warning btn-sm"   href="/Payments/Details/' + result + '">تفاصيل&nbsp;</a>&nbsp;';
+            document.getElementById("Details").style.display = "block";
+            document.getElementById('bill').innerHTML = '<a class="btn btn-warning btn-sm" style=" background-color: blue;"  href="/Payments/bill?PaymentId=' + result + '">طباعة</a>';
+            document.getElementById("bill").style.display = "block";
+
+
+
+        });
+
+        $(document).ready(function () {
+            //$('#dataTable').DataTable(); // ID From dataTable
+              $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+      }
+

@@ -1,0 +1,86 @@
+﻿@model Ahlia.Models.Rassing
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تراجع عن الزيادة </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Delete" id="Createform" onsubmit="go()" role="form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" readonly />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContractImag" class="control-label"> @Html.DisplayNameFor(model => model.ContractImag)</label><br />
+
+                        <img src="@ViewBag.ImageDataUrl" width="300" height="300" style="border-radius: 8px;" alt="لايوجد صورة" />
+
+                        <span asp-validation-for="ContractImag" class="text-danger"></span>
+                    </div>
+                                   </div>
+            </div>
+            <a class="btn btn-primary btn-lg btn-block" onclick="Create_func()">
+                تراجع
+            </a>
+
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function Create_func() {
+           // var form = document.getElementById("Createform");
+           // if (form.checkValidity()) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'هل أنت متأكد من التراجع؟',
+                    text: 'قم بالتأكيد',
+                    footer: '<button class="swal2-confirm swal2-styled" type="submit" form="Createform">تراجع</button>',
+                    showCancelButton: false,
+                showConfirmButton:false,
+                    showCloseButton: true
+                });
+          //  }
+           
+
+        }
+        function go() {
+            swal({
+                title: "",
+                text: "الرجاء الانتظار...",
+                icon: "https://www.boasnotas.com/img/loading2.gif",
+                buttons: false,
+                closeOnClickOutside: false,
+                //timer: 3000,
+                //icon: "success"
+            })
+            Swal.showLoading()
+                ;
+
+
+        }
+    </script>
+}

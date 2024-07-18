@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Ahlia.Models.Payment>
+
+@{
+    ViewData["Title"] = "الدفعات";
+}
+
+
+
+
+<div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary pull-right"> @ViewBag.pen <br />@ViewBag.pay <br />@ViewBag.EndValue</h6>
+
+
+        <span>جدول دفعات مساهم</span>
+
+
+        <a asp-controller="Clients"  asp-action="Index" class=" pull-left">
+            العودة إلى الصفحة السابقة
+        </a>
+
+      
+
+
+        
+   </div>
+    <div class="table-responsive p-3">
+
+        <table class="table align-items-center table-flush" id="dataTableHover">
+            <thead class="thead-light">
+                <tr>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.ClientId)</th>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.Paymentdate)</th>
+                    <th style="white-space: nowrap;text-align: center;">  @Html.DisplayNameFor(model => model.Amount)</th>
+                   
+                    
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Client.FirstName)
+                       </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Paymentdate)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts
+
+    {
+
+    <script>
+
+
+
+
+       
+
+        $(document).ready(function () {
+            //$('#dataTable').DataTable(); // ID From dataTable
+            $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+      }
+
+

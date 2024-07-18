@@ -1,0 +1,43 @@
+﻿@model Ahlia.Models.Rassing
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>زيادة رأس المال</p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control"  readonly/>
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractImag" class="control-label"> @Html.DisplayNameFor(model => model.ContractImag)</label><br />
+
+                <img src="@ViewBag.ImageDataUrl" width="300" height="300" style="border-radius: 8px;" alt="لايوجد صورة" />
+
+                <span asp-validation-for="ContractImag" class="text-danger"></span>
+            </div>
+           
+
+        </form>
+    </div>
+</div>

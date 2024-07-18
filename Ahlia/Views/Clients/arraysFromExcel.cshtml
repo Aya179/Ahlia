@@ -1,0 +1,388 @@
+﻿        <div class="text-center">
+    <form id="prospects_form" method="post" enctype="multipart/form-data">
+        <input class="btn btn-outline-success mb-1" type="file" name="file1" id="file1" multiple />
+                <input class="btn btn-outline-success mb-1" type="submit" value="Upload" onclick="uploadexcel()"  />
+            </form>
+        </div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">الغيرمودعين قبل التعديل</h6>
+            </div>
+            <div class="table-responsive p-3">
+                <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive p-3">
+
+
+                            <table class="table align-items-center table-flush" id="dataTable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th style="white-space: nowrap;">اسم المساهم </th>
+                                        <th style="white-space: nowrap;"> الأب</th>
+                                        <th style="white-space: nowrap;"> النسبة</th>
+                                        <th style="white-space: nowrap;"> الأم</th>
+                                        <th style="white-space: nowrap;"> رقم الوثيقة الرسمية</th>
+                                        <th style="white-space: nowrap;"> نوع الوثيقة الرسمية</th>
+                                        <th style="white-space: nowrap;"> العنوان</th>
+                                        <th style="white-space: nowrap;"> الجنسية</th>
+                                        <th style="white-space: nowrap;"> عدد الأوراق المالية الحرة</th>
+                                        <th style="white-space: nowrap;"> عدد الأوراق المالية المقيدة</th>
+                                       
+
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody id="sheet2Befor">
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">الغيرمودعين بعد التعديل</h6>    
+                <button type="button" onclick="edit2()" class="btn-sm btn-success pull-right">حفظ السجلات المعدلة</button>
+
+            </div>
+            <div class="table-responsive p-3">
+
+
+                <table class="table align-items-center table-flush" id="dataTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="white-space: nowrap;">اسم المساهم </th>
+                            <th style="white-space: nowrap;"> الأب</th>
+                            <th style="white-space: nowrap;"> النسبة</th>
+                            <th style="white-space: nowrap;"> الأم</th>
+                            <th style="white-space: nowrap;"> رقم الوثيقة الرسمية</th>
+                            <th style="white-space: nowrap;"> نوع الوثيقة الرسمية</th>
+                            <th style="white-space: nowrap;"> العنوان</th>
+                            <th style="white-space: nowrap;"> الجنسية</th>
+                            <th style="white-space: nowrap;"> عدد الأوراق المالية الحرة</th>
+                            <th style="white-space: nowrap;"> عدد الأوراق المالية المقيدة</th>
+
+
+
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="sheet2After">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">مودعين قبل التعديل</h6>
+            </div>
+            <div class="table-responsive p-3">
+                <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive p-3">
+
+
+                            <table class="table align-items-center table-flush" id="dataTable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th style="white-space: nowrap;">اسم المساهم </th>
+                                        <th style="white-space: nowrap;"> الأب</th>
+                                    
+                                        <th style="white-space: nowrap;"> الأم</th>
+                                        <th style="white-space: nowrap;"> رقم الخليوي</th>
+                                        <th style="white-space: nowrap;"> رقم هاتف العمل</th>
+                                        <th style="white-space: nowrap;"> رقم هاتف المنزل</th>
+                                        <th style="white-space: nowrap;">الفاكس</th>
+                                        
+                                  
+                                        <th style="white-space: nowrap;"> العنوان</th>
+                                        <th style="white-space: nowrap;"> الجنسية</th>
+                                        <th style="white-space: nowrap;"> عدد الأوراق المالية الحرة</th>
+                                        <th style="white-space: nowrap;"> عدد الأوراق المالية المقيدة</th>
+
+
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody id="sheet1">
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">المودعين بعد التعديل</h6>
+                <button type="button" onclick="edit1()" class="btn-sm btn-success pull-right">حفظ السجلات المعدلة</button>
+            </div>
+            <div class="table-responsive p-3">
+
+
+                <table class="table align-items-center table-flush" id="dataTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="white-space: nowrap;">اسم المساهم </th>
+                            <th style="white-space: nowrap;"> الأب</th>
+                           
+                            <th style="white-space: nowrap;"> الأم</th>
+                            <th style="white-space: nowrap;"> رقم الخليوي</th>
+                            <th style="white-space: nowrap;"> رقم هاتف العمل</th>
+                            <th style="white-space: nowrap;"> رقم هاتف المنزل</th>
+                            <th style="white-space: nowrap;">الفاكس</th>
+
+
+                            <th style="white-space: nowrap;"> العنوان</th>
+                            <th style="white-space: nowrap;"> الجنسية</th>
+                            <th style="white-space: nowrap;"> عدد الأوراق المالية الحرة</th>
+                            <th style="white-space: nowrap;"> عدد الأوراق المالية المقيدة</th>
+
+
+
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="sheet">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts
+
+    {
+    <script>
+
+        $("#prospects_form").submit(function (e) {
+            e.preventDefault();
+        });
+
+        var sh2 = [];
+        var sh1 = [];
+
+        function uploadexcel()
+        {
+           // alert("d");
+
+            $.ajax(
+                {
+                    url: "/Clients/arraysFromExcelapi",
+                    data: new FormData($("#prospects_form")[0]),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: "POST",
+                    success: function (data) {
+                      
+                         sh1 = data.sheet1update.slice();
+                         sh2 = data.sheet2update.slice();
+                        Swal.fire(
+
+                            'تم نحميل ملف الاكسل بنجاح'
+                        )
+                        
+                        var table_tr = "";
+                        for (var i = 0; i < data.sheet2update.length; i++) {
+
+                        table_tr += `
+                                                                         <tr>
+                                                                                                         <td style="text-align: center;"> `+ data.sheet2update[i].firstName + ` </td>
+                                                                                                                                      <td style="text-align: center;"> `+ data.sheet2update[i].middleName + ` </td>
+
+                                                                                                                        <td style="text-align: center;"> `+ data.sheet2update[i].lastName + ` </td>
+                                                                                                                                <td style="text-align: center;"> `+ data.sheet2update[i].mother + ` </td>
+                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2update[i].nationalId + ` </td>
+                                                                                                                                                <td style="text-align: center;"> `+ data.sheet2update[i].nationalIdType + ` </td>
+                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2update[i].originalAddress + ` </td>
+                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet2update[i].nationality + ` </td>
+
+                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2update[i].activeStocks + ` </td>
+                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet2update[i].notactiveStocks + ` </td>
+                                                                                                                                        
+
+
+
+                                                                           </tr>`;
+                                                                           }
+                        document.getElementById('sheet2After').innerHTML = table_tr;
+
+
+
+                        var table_tr2 = "";
+                        for (var i = 0; i < data.sheet2beforeupdate.length; i++) {
+                       
+                            
+                            table_tr2 += `
+                                                                                 <tr>
+                                                                                                                         <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].firstName + ` </td>
+                                                                                                                                                      <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].middleName + ` </td>
+
+                                                                                                                                <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].lastName + ` </td>
+                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].mother + ` </td>
+                                                                                                                                                <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].nationalId + ` </td>
+                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].nationalIdType + ` </td>
+                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].originalAddress + ` </td>
+                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].nationality + ` </td>
+
+                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].activeStocks + ` </td>
+                                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet2beforeupdate[i].notactiveStocks + ` </td>
+
+
+
+
+                                                                                   </tr>`;
+                                                                                   
+                        }
+                        document.getElementById('sheet2Befor').innerHTML = table_tr2;
+
+
+
+
+                        var table_tr3 = "";
+                        for (var i = 0; i < data.sheet1beforupdate.length; i++) {
+                            console.log(data.sheet1beforupdate[i].firstName);
+                            
+                            table_tr3 += `
+                                                                                         <tr>
+                                                                                                                                                 <td style="text-align: center;"> `+ data.sheet1beforupdate[i].firstName + ` </td>
+                                                                                                                                                         <td style="text-align: center;"> `+ data.sheet1beforupdate[i].middleName + ` </td>
+                                                                                                                                                                             
+
+                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1beforupdate[i].mother + ` </td>
+                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1beforupdate[i].mobile2 + ` </td>
+                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1beforupdate[i].mobile1 + ` </td>
+                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1beforupdate[i].homePhone + ` </td>
+                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1beforupdate[i].fax + ` </td>
+                                                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1beforupdate[i].originalAddress + ` </td>
+                                                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1beforupdate[i].nationality + ` </td>
+                                                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1beforupdate[i].activeStocks + ` </td>
+
+                                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1beforupdate[i].notactiveStocks + ` </td>
+                                                                                                                                                                                              
+
+
+
+
+                                                                                           </tr>`;
+                                                                                          
+                        }
+                        document.getElementById('sheet1').innerHTML = table_tr3;
+
+
+
+
+
+                        var table_tr4 = "";
+                        for (var i = 0; i < data.sheet1update.length; i++) {
+
+                            table_tr4 += `
+                                                                                                 <tr>
+                                                                                                                                                                                 <td style="text-align: centsheet2updateer;"> `+ data.sheet1update[i].firstName + ` </td>
+                                                                                                                                                                                         <td style="text-align: centsheet2updateer;"> `+ data.sheet1update[i].middleName + ` </td>
+                                                                                                                                                                                                     
+
+                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].mother + ` </td>
+                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].mobile2 + ` </td>
+                                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1update[i].mobile1 + ` </td>
+                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].homePhone + ` </td>
+                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].fax + ` </td>
+                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].originalAddress + ` </td>
+                                                                                                                                                                                                        <td style="text-align: center;"> `+ data.sheet1update[i].nationality + ` </td>
+                                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].activeStocks + ` </td>
+
+                                                                                                                                                                                                                <td style="text-align: center;"> `+ data.sheet1update[i].notactiveStocks + ` </td>
+
+
+
+
+
+                                                                                                   </tr>`;
+                        }
+                        document.getElementById('sheet').innerHTML = table_tr4;
+
+
+
+              }
+            } );
+       
+
+
+        }
+
+
+        function edit2() {
+
+            for (var i = 0; i < sh2.length; i++) {
+
+                $.post("/Clients/EditClient", { c: sh2[i] }, function (data) {
+                    Swal.fire(
+
+                        'تم التعديل'
+                    )
+
+
+                });
+
+
+            }
+
+        }
+        function edit1() {
+
+            for (var i = 0; i < sh1.length; i++) {
+
+                $.post("/Clients/EditClient", { c: sh1[i] }, function (data) {
+
+                    Swal.fire(
+
+                        'تم التعديل'
+                    )
+                });
+
+
+            }
+
+        }
+
+
+
+    </script>
+      }
+

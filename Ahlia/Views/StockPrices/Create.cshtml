@@ -1,0 +1,119 @@
+﻿@model Ahlia.Models.StockPrice
+
+@{
+    ViewData["Title"] = "إنشاء سهم";
+}
+<style>
+    .swal2-actions {
+        display: none !important;
+    }
+
+
+   
+</style>
+@if (!string.IsNullOrEmpty(ViewBag.message))
+{
+    
+         <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+
+        لقد قمت بتوزيع الأرباح لهذه السنة من قبل
+      
+
+
+
+        </div>
+    }
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>توزيع الأرباح على المساهمين</p>
+
+
+    </div>
+    <div class="card-body">
+
+        <form id="Createform" role="form" asp-action="Create" enctype="multipart/form-data" method="post" style=" width: 50vw;  margin: auto;" onsubmit="go()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label asp-for="Shareprice" class="control-label"></label><span style="color:red;">*</span>
+                        <input type="number" min="1" asp-for="Shareprice" class="form-control" required />
+                        <span asp-validation-for="Shareprice" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group">
+                        <label asp-for="Sharedate" class="control-label"></label>
+                        <input type="date" asp-for="Sharedate" class="form-control" />
+                        <span asp-validation-for="Sharedate" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="Sharedate" class="control-label"></label><span style="color:red;">*</span>
+                        <input type="date" id="datepicker" asp-for="Sharedate" class="form-control" max="@DateTime.Today.ToString("yyyy-MM-dd")"  required  />
+                        <span asp-validation-for="Sharedate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContractImage" class="control-label"> @Html.DisplayNameFor(model => model.ContractImage)</label><span style="color:red;">*</span>
+                        <input asp-for="ContractImage" class="form-control" type="file" name="ContractImage" id="ContractImage" accept="image/*" multiple="multiple"  />
+
+
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-lg btn-block" onclick="Create_func()">
+                توزيع الأرباح
+            </a>
+        </form>
+    </div>
+
+@section Scripts {
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            function Create_func() {
+                var form = document.getElementById("Createform");
+                if (form.checkValidity())
+               { Swal.fire({
+                    icon: 'warning',
+                    title: 'هل أنت متأكد من إضافة البيانات؟',
+                    text: 'قم بالتأكيد',
+                    footer: '<button class="swal2-confirm swal2-styled" type="submit" form="Createform">توزيع الأرباح</button>',
+                    showCancelButton: true,
+                    showCloseButton: true
+                });}
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'الرجاء إدخال جميع القيم بالشكل الصحيح',
+                        showCloseButton: true
+                       
+                    });
+
+                }
+              
+            }
+            function go(){
+                swal({
+                    title: "",
+                    text: "الرجاء الانتظار...",
+                    icon: "https://www.boasnotas.com/img/loading2.gif",
+                    buttons: false,
+                    closeOnClickOutside: false,
+                    //timer: 3000,
+                    //icon: "success"
+                })
+                                 Swal.showLoading()
+                ;
+               
+               
+            }
+        </script>
+}

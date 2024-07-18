@@ -1,0 +1,102 @@
+﻿@model Ahlia.Models.ClientStokcksMovement
+
+@{
+    ViewData["Title"] = "تفاصيل";
+}
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <span>صك البيع</span>
+        <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+
+    </div>
+
+    <div class="card-body">
+        <form id="dataTableHover">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Id" class="control-label"></label>
+                        <input asp-for="Id" class="form-control" readonly />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ClientId" class="control-label"></label>
+                        <input asp-for="Client.FirstName" class="form-control" readonly />
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MovementTypeId" class="control-label"></label>
+                        <input asp-for="MovementType.MovementType" class="form-control" readonly />
+                        <span asp-validation-for="MovementTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" readonly />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                                   </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="NewClientId" class="control-label"></label>
+                        <input asp-for="NewClient.FirstName" class="form-control" readonly />
+                        <span asp-validation-for="NewClientId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MovementDate" class="control-label"></label>
+                        <input type="date" asp-for="MovementDate" class="form-control"  readonly/>
+                        <span asp-validation-for="MovementDate" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label>
+                        <input asp-for="Reason" class="form-control" readonly />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label"></label>
+                        <input asp-for="Notes" class="form-control"  readonly/>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+@section Scripts{
+
+
+
+    <script>
+
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('dataTableHover');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'نقل.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+
+    </script>
+}

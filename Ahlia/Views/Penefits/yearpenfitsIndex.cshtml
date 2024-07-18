@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "أرباح كل دورة";
+}
+
+@*<style>
+    tr:hover, tr.selected {
+        background-color: lightblue;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    }
+
+    a {
+        display: inline-block;
+    }
+
+</style>
+*@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">أرباح كل دورة</h6>
+            </div>
+            <div class="table-responsive p-3">
+                <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table align-items-center table-flush " id="dataTableHover" role="grid" aria-describedby="dataTableHover_info">
+                                <thead class="thead-light">
+                                    <tr>
+                                       
+
+                                        <th style="white-space: nowrap;text-align:center;"> الدورة</th>
+                                        <th style="white-space: nowrap;text-align:center;"> الأرباح الكلية</th>
+
+
+
+
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="customertable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts
+
+    {
+    <script>
+
+
+
+        $(document).ready(function () {
+           
+          
+            customersearch();
+           
+
+        });
+
+
+
+
+        function customersearch() {
+
+
+
+
+            $.get("/Penefits/yearspenfits", function (data) {
+               
+                var table_tr = "";
+                // var Sumtotal = 0;
+               
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                                                 <tr>
+                                                                                 <td style="text-align: center;"> `+ data[i].cId + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data[i].value + ` </td>
+
+                                                                                                
+
+
+                                                                   </tr>`;
+                    //Sumtotal += data[i].total;
+
+
+                }
+                // document.getElementById("customerTotal").value = Sumtotal;
+
+
+                document.getElementById('customertable').innerHTML = table_tr;
+                $('#dataTableHover').DataTable(); // ID From dataTable
+
+
+
+
+            });
+
+
+
+
+
+
+        }
+
+    </script>
+      }
+

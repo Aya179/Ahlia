@@ -1,0 +1,42 @@
+﻿
+@*<form asp-action="CreateRole"
+      asp-controller="Employees" method="post">
+    <input name="rolename" />
+    
+    <button type="submit">Submit</button>
+</form>
+*@
+
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="IndexRoleView">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>إنشاء سماحية</p>
+
+
+    </div>
+    <div class="card-body">
+        <form asp-action="CreateRole"
+              asp-controller="Employees" method="post" style=" width: 50vw;  margin: auto;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label  class="control-label">السماحية</label>
+                        <input name="rolename" class="form-control" />
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                إضافة سماحية
+            </button>
+        </form>
+    </div>
+</div>

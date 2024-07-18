@@ -1,0 +1,83 @@
+﻿@model Ahlia.Models.Penefit
+
+@{
+    ViewData["Title"] = "إنشاء";
+}
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>إنشاء </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Create" style=" width: 50vw;  margin: auto;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+        
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClientId" class="control-label"></label>
+                      @*  <select id="ClientId" asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId"></select>*@
+                        <select style="height:50px;" class="select2-single form-control" name="state" id="select2Singleid" asp-items="ViewBag.ClientId">
+                            <option value="0">اختر المساهم </option>
+                           
+
+                        </select>
+
+                    </div>
+            <div class="form-group">
+                <label asp-for="PriceId" class="control-label"></label>
+                 <select id="PriceId" asp-for="PriceId" class="form-control" asp-items="ViewBag.PriceId" onclick="getpenfits()"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompleteAmount" class="control-label"></label>
+                        <input id="CompleteAmount" asp-for="CompleteAmount" class="form-control" />
+                <span asp-validation-for="CompleteAmount" class="text-danger"></span>
+            </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="إضافة" class="btn btn-primary btn-lg btn-block"   />
+            </div>
+        
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+
+
+
+    <script>
+        function getpenfits(){
+            var client = document.getElementById('ClientId').value;
+            var stockPrice = document.getElementById('PriceId').value
+            $.get("/Penefits/getPenfits", { clientId: client, stockId: stockPrice }, function (data) {
+                document.getElementById('CompleteAmount').value = data;
+
+                // alert(data);
+
+            });
+        }
+
+        $(document).ready(function () {
+
+
+            $('.select2-single').select2();
+
+
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

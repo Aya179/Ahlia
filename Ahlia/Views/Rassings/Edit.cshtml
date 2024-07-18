@@ -1,0 +1,44 @@
+﻿@model Ahlia.Models.Rassing
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تعديل </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post" style=" width: 50vw;  margin: auto;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label>
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="ContractImag" class="control-label"> @Html.DisplayNameFor(model => model.ContractImag)</label>
+                    <input asp-for="ContractImag" class="form-control" type="file" name="ContractImage" id="ContractImage" accept="image/*" multiple="multiple" />
+
+
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                تعديل
+            </button>
+
+
+        </form>
+    </div>
+</div>

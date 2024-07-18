@@ -1,0 +1,293 @@
+﻿
+@model Ahlia.Models.ClientStokcksMovement
+
+@{
+    ViewData["Title"] = "نقل الأسهم";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.msg))
+{
+    if (ViewBag.msg == "FisrtCondition")
+    {
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+
+            @ViewBag.mssg
+
+            <script>
+
+            </script>
+
+        </div>
+    }
+  
+     
+}
+@if (!string.IsNullOrEmpty(ViewBag.secondmssg))
+{
+    if (ViewBag.secondmssg == "SecondCondition1")
+    {
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+
+            لا يمكنك النقل...الرصيد لدى المساهم  أكبر من الصفر
+
+
+
+        </div>
+    }
+  
+     
+}
+@if (!string.IsNullOrEmpty(ViewBag.msg))
+{
+    if (ViewBag.msg == "firstelse")
+    {
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+
+            @ViewBag.mssg
+
+
+
+        </div>
+    }
+
+
+}
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>نقل الملكية </p>
+
+
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" style=" width: 50vw;  margin: auto;" id="formSubmission" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-4">
+                <div class="col">
+
+                    <div class="form-group">
+                        <label class="control-label" for="select2Single" asp-for="ClientId"></label><span style="color:red;">*</span>
+                        <select class="select2-single form-control"  name="state" id="select2Single" onchange="old()" required >
+                        </select>
+                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                        <input asp-for="ClientId" id="oldclient"  value="" required  hidden/>
+                    </div>
+                    @* <div class="form-group">
+                    <label asp-for="ClientId" class="control-label"></label>
+                    <select asp-for="ClientId" class="select2-single-placeholder form-control select2-hidden-accessible" name="state" id="select2SinglePlaceholder" data-select2-id="select2SinglePlaceholder" asp-items="ViewBag.ClientId"></select>
+                    <span asp-validation-for="ClientId" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="MovementTypeId" class="control-label"></label><span style="color:red;">*</span>
+                        <select asp-for="MovementTypeId" class="form-control" asp-items="ViewBag.MovementTypeId" required></select>
+                        <span asp-validation-for="MovementTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Amount" class="control-label"></label><span style="color:red;">*</span>
+                        <input type="number" min="1" asp-for="Amount" class="form-control" value="" title="الرجاء الادخال بالشكل الصحيح" required />
+                    </div>
+                   
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label"></label>
+                        <textarea asp-for="Notes" class="form-control"placeholder="ملاحظات"></textarea>
+
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="select2Single" asp-for="NewClientId" class="control-label"></label><span style="color:red;">*</span>
+                        <select onchange="news()" style="height:50px;" class="select2-single form-control" name="state" id="select2Singleid" asp-items="ViewBag.NewClientId1" required>
+                            <option>اختر المساهم الجديد</option>
+                            <option value="addNewClient">
+                                <a  href="/Clients/Create">إضافة مساهم جديد</a>
+                            </option>
+                         
+                        </select>
+                        <span asp-validation-for="NewClientId" class="text-danger"></span>
+                        <input id="newclient" asp-for="NewClientId"  value=""  hidden required />
+                    </div>
+
+                    <div class="form-group" hidden>
+                        <label asp-for="ContractImage" class="control-label"></label>
+                        <input type="file" asp-for="ContractImage" class="form-control" name="ContractImage" accept="image/*" id="ContractImage" />
+                        <span asp-validation-for="ContractImage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MovementDate" class="control-label"></label><span style="color:red;">*</span>
+                        <input type="date" asp-for="MovementDate" class="form-control" max="@DateTime.Today.ToString("yyyy-MM-dd")" value="" title="الرجاء الادخال بالشكل الصحيح" required />
+                        <span asp-validation-for="MovementDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label><span style="color:red;">*</span>
+                        <textarea asp-for="Reason" class="form-control" placeholder="السبب" title="الرجاء الادخال بالشكل الصحيح" required></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    
+
+                </div>
+                
+
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" >
+                نقل الاسهم
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+
+    <script>
+        function old() {
+            var e1 = document.getElementById("select2Single").value;
+            document.getElementById("oldclient").setAttribute('value', e1);
+          //  document.getElementById("newclient").setAttribute('value', e1);
+            var idvalue = document.getElementById("oldclient").value;
+
+            $.get("/ClientStokcksMovements/GetClientStock", { id: idvalue }, function (data) {
+
+                document.getElementById("formSubmission").reset();
+
+                document.getElementById("Amount").setAttribute('value', data.total);
+                document.getElementById("Amount").setAttribute('max', data.total);
+               
+
+
+            });
+
+           
+
+        }
+        //function submitForm() {
+        //    // Get the first form with the name
+        //    // Usually the form name is not repeated
+        //    // but duplicate names are possible in HTML
+        //    // Therefore to work around the issue, enforce the correct index
+        //    var frm = document.getElementById('formSubmission');
+        //    frm.submit(); // Submit the form
+        //    frm.reset(); // Submit the form
+        //    document.getElementById("oldclient").value = "";
+        //    return false;
+
+          
+        //}
+       
+       
+
+
+        function news() {
+            var e1 = document.getElementById("select2Singleid").value;
+            if (e1 === 'addNewClient') {
+                window.open('/Clients/Create', '_blank');
+            }
+           // alert(e1);
+            // document.getElementById("oldclient").value = e1;
+
+            document.getElementById("newclient").setAttribute('value', e1);
+
+
+        }
+
+
+        $(document).ready(function () {
+//document.getElementById("formSubmission").reset();
+            //var selecttext = document.getElementById("select2Single").text;
+            //if (selecttext == "الرجاء اختيار المساهم"){
+            //    document.getElementById("oldclient").setAttribute('value', " ");
+            //}
+            //var e1 = document.getElementById("select2Singleid").text;
+            //if (e1 == "اختر المساهم الجديد") {
+            //    document.getElementById("newclient").setAttribute('value', " ");
+            //}
+
+            $.get("/ClientStokcksMovements/GetClients", function (data) {
+                console.log(data);
+                //
+                var select = document.getElementById("select2Single");
+               
+
+
+                select.innerHTML = "  <option  >الرجاء اختيار المساهم</option>";
+
+                for (var i = 0; i < data.length; i++) {
+                   
+
+                    var option = document.createElement("option");
+                    if (data[i].nationalId!=null) {
+
+                        option.text = data[i].firstName + "-" + data[i].nationalId;
+
+                        option.value = data[i].id;
+                        select.appendChild(option);
+
+
+                    
+                    
+                    }
+                    else{
+                        option.text = data[i].firstName;
+                        option.value = data[i].id;
+                        select.appendChild(option);
+                    }
+                    
+                    // var option = document.createElement("option");
+                    //if (data[i].nationalId!=null) {
+                    //    var optgroup = document.createElement("optgroup");
+                    //    optgroup.setAttribute("label", data[i].nationalId);
+                    //    optgroup.setAttribute("class", "select2 - result - selectable");
+                    //    option.text = data[i].firstName ;
+
+                    //    option.value = data[i].id;
+                    //    select.appendChild(option);
+                    //    select.appendChild(optgroup);
+
+
+                    
+                    
+                    //}
+                    //else{
+                    //    option.text = data[i].firstName;
+                    //    option.value = data[i].id;
+                    //    select.appendChild(option);
+                    //}
+                    
+
+                  
+                   
+
+
+
+                }
+               $('#select2Singleid').select2();
+
+
+            });
+
+            $('.select2-single').select2();
+            //$('#select2Singleid').select2();
+
+
+        });
+      
+    </script>
+}

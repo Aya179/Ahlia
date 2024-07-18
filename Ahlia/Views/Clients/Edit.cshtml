@@ -1,0 +1,217 @@
+﻿@model Ahlia.Models.Client
+
+@{
+    ViewData["Title"] = "تعديل المساهمين";
+}
+@if (!string.IsNullOrEmpty(ViewBag.messge))
+{
+    
+         <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+
+        @ViewBag.messge
+
+
+
+        </div>
+   
+    
+
+}
+
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تعديل معلومات المساهم</p>
+
+
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+            <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label><span style="color:red;">*</span>
+                        <input asp-for="FirstName" class="form-control" title="الرجاء ادخال الاسم الثلاثي بالشكل الصحيح" required />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="MiddleName" class="control-label"></label><span style="color:red;">*</span>
+                        <input asp-for="MiddleName" class="form-control" title="الرجاء ادخال اسم الأب بالشكل الصحيح" required />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label><span style="color:red;">*</span>
+                        <input asp-for="LastName" class="form-control" title="الرجاء ادخال الكنية بالشكل الصحيح" required />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="Mother" class="control-label"></label>
+                        <input asp-for="Mother" class="form-control" title="الرجاء ادخال اسم الأم  بالشكل الصحيح"  />
+                <span asp-validation-for="Mother" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                        <label asp-for="NationalId" class="control-label"></label>
+                        <input asp-for="NationalId" class="form-control" title="الرجاء ادخال رقم الوثيقة الرسمية بالشكل الصحيح"  />
+                <span asp-validation-for="NationalId" class="text-danger"></span>
+            </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="NationalIdType" class="control-label"></label>
+                        <select asp-for="NationalIdType" class="form-control" title="الرجاء الاخنيار نوع الوثيقة" >
+
+                            <option value="هوية">هوية</option>
+                            <option value="جواز سفر">جواز سفر</option>
+                            <option value="إقامة">إقامة</option>
+                </select> 
+                <span asp-validation-for="NationalIdType" class="text-danger"></span>
+            </div>
+                    <div class="form-group" >
+                <label asp-for="Mobile1" class="control-label"></label>
+                <input type="tel" asp-for="Mobile1" class="form-control" />
+                <span asp-validation-for="Mobile1" class="text-danger"></span>
+            </div>
+                    <div class="form-group" >
+                <label asp-for="Mobile2" class="control-label"></label>
+                <input  type="tel" asp-for="Mobile2" class="form-control" />
+                <span asp-validation-for="Mobile2" class="text-danger"></span>
+            </div>
+                    <div class="form-group" >
+                <label asp-for="AddressDomicil" class="control-label"></label>
+                <input asp-for="AddressDomicil" class="form-control" />
+                <span asp-validation-for="AddressDomicil" class="text-danger"></span>
+            </div>
+                    <div class="form-group" >
+                <label asp-for="AddressWork" class="control-label"></label>
+                <input asp-for="AddressWork" class="form-control" />
+                <span asp-validation-for="AddressWork" class="text-danger"></span>
+            </div>
+                    <div class="form-group" >
+                        <label asp-for="OriginalAddress" class="control-label"></label>
+                        <input asp-for="OriginalAddress" class="form-control" title="الرجاء ادخال عنوان السكن بالشكل الصحيح"  />
+                <span asp-validation-for="OriginalAddress" class="text-danger"></span>
+            </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="Nationality" class="control-label"></label>
+                        <input asp-for="Nationality" class="form-control" title="الرجاء ادخال الجنسية بالشكل الصحيح"  />
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="ClientStatus" class="control-label"></label>
+                <input asp-for="ClientStatus" class="form-control" />
+                <span asp-validation-for="ClientStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="IsActive" class="control-label"></label>
+                <input asp-for="IsActive" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group" >
+                        <label asp-for="HomePhone" class="control-label"></label>
+                        <input type="tel" asp-for="HomePhone" class="form-control" title="الرجاء ادخال رقم المنزل بالشكل الصحيح"  />
+                <span asp-validation-for="HomePhone" class="text-danger"></span>
+            </div>
+            </div>
+                    <div class="col">
+            <div class="form-group">
+                <label asp-for="Fax" class="control-label"></label>
+                <input asp-for="Fax" class="form-control" />
+                <span asp-validation-for="Fax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="Khana" class="control-label"></label>
+                        <input asp-for="Khana" class="form-control" title="الرجاء ادخال الخانة بالشكل الصحيح"  />
+                <span asp-validation-for="Khana" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="Birthdate" class="control-label"></label>
+                        <input type="date" asp-for="Birthdate" class="form-control" max="@DateTime.Today.ToString("yyyy-MM-dd")" title="الرجاء ادخال تاريخ الميلاد  بالشكل الصحيح"  />
+                <span asp-validation-for="Birthdate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="Birthcity" class="control-label"></label>
+                        <input asp-for="Birthcity" class="form-control" title="الرجاء ادخال مدينة الولادة بالشكل الصحيح"  />
+                <span asp-validation-for="Birthcity" class="text-danger"></span>
+            </div>
+               
+            <div class="form-group">
+                        <label asp-for="ClientTypeId" class="control-label"></label>
+                        <select asp-for="ClientTypeId" class="form-control" asp-items="ViewBag.ClientTypeId" title="الرجاء الاخنيار" ></select>
+                <span asp-validation-for="ClientTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BankAccount" class="control-label"></label>
+                <input asp-for="BankAccount" class="form-control" />
+                <span asp-validation-for="BankAccount" class="text-danger"></span>
+            </div>
+                    <div class="form-group ">
+                        <label asp-for="Idphoto" class="control-label"> @Html.DisplayNameFor(model => model.Idphoto)</label>
+                        <input class="form-control" type="file" name="Idphoto" id="Idphoto" accept="image/*" multiple="multiple" />
+
+
+                       @* <span asp-validation-for="Idphoto" class="text-danger"></span>*@
+                    </div>
+
+                    <div class="form-group ">
+                        <label asp-for="IdcardPhoto" class="control-label"> @Html.DisplayNameFor(model => model.IdcardPhoto)</label>
+                        <input class="form-control" type="file" name="IdcardPhoto" id="IdcardPhoto" accept="image/*" multiple="multiple" />
+
+
+                        @*<span asp-validation-for="IdcardPhoto" class="text-danger"></span>*@
+                    </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden >
+                <label asp-for="IsAlive" class="control-label"></label>
+                <input asp-for="IsAlive" class="form-control" />
+                <span asp-validation-for="IsAlive" class="text-danger"></span>
+            </div>
+            <div class="form-group"  hidden>
+                <label asp-for="IsDeleted" class="control-label"></label>
+                <input asp-for="IsDeleted" class="form-control" />
+                <span asp-validation-for="IsDeleted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="CityId" class="control-label"></label>
+                        <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId" title="الرجاء الاخنيار" ></select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="ActiveStocks" class="control-label"></label>
+                        <input asp-for="ActiveStocks" class="form-control" type="number" min="0" title="الرجاء ادخال  عددالأسهم النشطة بالشكل الصحيح"  />
+                <span asp-validation-for="ActiveStocks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                        <label asp-for="NotactiveStocks" class="control-label"></label>
+                        <input asp-for="NotactiveStocks" class="form-control" type="number" min="0" title="الرجاء ادخال عدد الأسهم الغير نشطة بالشكل الصحيح"  />
+                <span asp-validation-for="NotactiveStocks" class="text-danger"></span>
+            </div>
+            </div>
+            </div>
+
+
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                تعديل معلومات المساهم
+            </button>
+            
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

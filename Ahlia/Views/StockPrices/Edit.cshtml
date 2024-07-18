@@ -1,0 +1,93 @@
+﻿@model Ahlia.Models.StockPrice
+
+@{
+    ViewData["Title"] = "تعديل";
+}
+<style>
+    .swal2-actions {
+        display: none !important;
+    }
+</style>
+@if (!string.IsNullOrEmpty(ViewBag.message))
+{
+
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+
+        لقد قمت بتوزيع الأرباح لهذه السنة من قبل
+
+
+
+
+    </div>
+}
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تعديل عملية التوزيع </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form role="form" asp-action="Edit" enctype="multipart/form-data" method="post" style=" width: 50vw;  margin: auto;" id="Editform">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="Shareprice" class="control-label"></label>
+                        <input asp-for="Shareprice" class="form-control"  type="number" min="1"/>
+                        <span asp-validation-for="Shareprice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="Sharedate" class="control-label"></label>
+                        <input type="date" asp-for="Sharedate" class="form-control" readonly />
+                        <span asp-validation-for="Sharedate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Year" class="control-label"></label>
+                        <input asp-for="Year" class="form-control" type="number" min="@DateTime.Today.ToString("yyyy")" max="@DateTime.Today.ToString("yyyy")"  readonly/>
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ContractImage" class="control-label"> @Html.DisplayNameFor(model => model.ContractImage)</label>
+                        <input asp-for="ContractImage" class="form-control" type="file" name="ContractImage" id="ContractImage" accept="image/*" multiple="multiple" />
+
+
+                    </div>
+                </div>
+              
+            </div>
+            <a class="btn btn-primary btn-lg btn-block" onclick="Edit_func()">
+                تعديل 
+            </a>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        function Edit_func() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'هل أنت متأكد من تعديل البيانات؟',
+                text: 'قم بالتأكيد',
+                footer: '<button class="swal2-confirm swal2-styled" type="submit" form="Editform">حفظ التعديلات</button>',
+                showCancelButton: true,
+                showCloseButton: true
+            });
+            
+        }
+    </script>
+  
+}

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Ahlia.Models.Client>
+
+@{
+    ViewData["Title"] = "المساهمين";
+}
+
+<style>
+    tr:hover, tr.selected {
+        background-color: lightblue;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    }
+
+    a {
+        display: inline-block;
+    }
+
+</style>
+<div class="card mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <a asp-action="Create" asp-controller="StoppedClient" class="m-0 font-weight-bold text-primary">
+
+            التحويل لغير مودع
+        </a>
+        <p class=" pull-right">المساهمين المودعين</p>
+    </div>
+
+    <div class="table-responsive p-3">
+        <div style="display: flex;">
+            <a id="delete" style="display:none">delete </a>
+            <a id="Edit" style="display:none">edit</a>
+            <a id="Details" style="display:none">details</a>
+            
+        </div>
+
+        <table class="table align-items-center table-flush" id="dataTableHover">
+            <thead class="thead-light">
+                <tr>
+                    <th style="white-space: nowrap;text-align: center;" hidden> @Html.DisplayNameFor(model => model.Id)</th>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.clientnumber)</th>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.FirstName)</th>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.MiddleName)</th>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.LastName)</th>
+
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.Mother)</th>
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.Mobile1)</th>
+                   
+                    <th style="white-space: nowrap;text-align: center;"> @Html.DisplayNameFor(model => model.OriginalAddress)</th>
+                    <th></th>
+                   
+
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align: center;" hidden>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.clientnumber)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.MiddleName)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Mother)
+                        </td>
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Mobile1)
+                        </td>
+
+                        <td style="text-align: center;">
+                            @Html.DisplayFor(modelItem => item.OriginalAddress)
+                        </td>
+                        <td style ="text-align: center; white-space: nowrap;">
+                            <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-eye"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts
+
+    {
+
+    <script>
+
+        $("#dataTableHover tr").click(function () {
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var value = $(this).find('td:first').html();
+            var result = value.split(' ').join('')
+            document.getElementById('delete').innerHTML = '<a class="btn btn-danger btn-sm" href="/Clients/Delete/' + result + '">حذف&nbsp;</a>&nbsp;';
+            document.getElementById("delete").style.display = "block";
+            document.getElementById('Edit').innerHTML = '<a  class="btn btn-primary btn-sm"  href="/Clients/Edit/' + result + '"> تعديل&nbsp;</a>&nbsp;';
+            document.getElementById("Edit").style.display = "block";
+            document.getElementById('Details').innerHTML = '<a class="btn btn-warning btn-sm"   href="/Clients/Details/' + result + '">تفاصيل</a>&nbsp;&nbsp;';
+            document.getElementById("Details").style.display = "block";
+          
+
+
+        });
+
+        $(document).ready(function () {
+            $('#dataTableHover').DataTable(); // ID From dataTable
+            //  $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+        });
+    </script>
+      }
+

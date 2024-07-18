@@ -1,0 +1,33 @@
+﻿<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="IndexRoleView">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>تعديل </p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-controller="Employees" asp-action="updateRoleView" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input name="id" type="hidden" value="@ViewBag.roleid" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="control-label">السماحية</label>
+                        <input name="name" class="form-control" value="@ViewBag.name" />
+
+                    </div>
+
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                تعديل
+            </button>
+
+
+        </form>
+    </div>
+</div>

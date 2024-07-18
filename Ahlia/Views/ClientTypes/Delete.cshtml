@@ -1,0 +1,44 @@
+﻿@model Ahlia.Models.ClientType
+
+@{
+    ViewData["Title"] = "حذف نوع المساهم";
+}
+
+
+<div class="card mb-4">
+    <div class="card-header" style=" display: flex;
+  justify-content: space-between;">
+        <a asp-action="Index">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <p>حذف النوع المساهم</p>
+
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TypeId" />
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="TypeName" class="control-label"></label>
+                        <input asp-for="TypeName" class="form-control" />
+                        <span asp-validation-for="TypeName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Notes" class="control-label"></label>
+                        <input asp-for="Notes" class="form-control" />
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+                حذف معلومات نوع المساهم
+            </button>
+
+        </form>
+    </div>
+</div>
+
